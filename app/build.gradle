@@ -9,7 +9,7 @@
 plugins {
     // Apply the groovy plugin to also add support for Groovy (needed for Spock)
     id 'groovy'
-
+    id 'checkstyle'
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
 }

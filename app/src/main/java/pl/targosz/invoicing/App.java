@@ -4,6 +4,7 @@
 package pl.targosz.invoicing;
 
 public class App {
+
     public String getGreeting() {
         return "Hello World!";
     }
