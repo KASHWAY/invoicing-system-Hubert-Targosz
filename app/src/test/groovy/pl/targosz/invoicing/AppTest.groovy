@@ -16,4 +16,10 @@ class AppTest extends Specification {
         then:
         result != null
     }
+    def "application init check"() {
+        setup:
+            def app = new App()
+        expect:
+            app.main()
+    }
 }
