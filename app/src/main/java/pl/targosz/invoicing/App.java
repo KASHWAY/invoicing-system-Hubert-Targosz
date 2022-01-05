@@ -4,14 +4,25 @@
 
 package pl.targosz.invoicing;
 
-public class App {
 
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.time.LocalDateTime;
+import pl.targosz.invoicing.database.Repository;
+import pl.targosz.invoicing.database.memory.InMemoryRepository;
+import pl.targosz.invoicing.model.Company;
+import pl.targosz.invoicing.model.Invoice;
+import pl.targosz.invoicing.model.InvoiceEntry;
+import pl.targosz.invoicing.services.InvoiceService;
+
+
+public class App  {
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Repository repository = new InMemoryRepository();
+        InvoiceService invoiceService = new InvoiceService(repository);
+
+        Company buyer = new Company("1234567891","KashwayCompany","Ul. Fiołkowa 15, Kraków");
+        Company seller = new Company("3373187493","Hubert Targosz", "Al. 3 Wieszczy 17/5, Kraków");
+
     }
 }
 
