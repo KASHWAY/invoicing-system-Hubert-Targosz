@@ -15,4 +15,11 @@ public class Invoice {
     private Company seller;
     private Company buyer;
     private List<InvoiceEntry> entries;
+
+    public Invoice(LocalDateTime createdAt, Company seller, Company buyer, List<InvoiceEntry> entries) {
+        this.createdAt = createdAt;
+        this.seller = seller;
+        this.buyer = buyer;
+        this.entries = entries;
+    }
 }

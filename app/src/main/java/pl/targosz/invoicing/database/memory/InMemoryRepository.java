@@ -8,7 +8,6 @@ import java.util.UUID;
 import pl.targosz.invoicing.database.Repository;
 import pl.targosz.invoicing.model.Invoice;
 
-
 public class InMemoryRepository implements Repository {
 
     protected Map<UUID, Invoice> invoices = new HashMap<>();
@@ -20,7 +19,6 @@ public class InMemoryRepository implements Repository {
         if (invoices.get(id) == null) {
             invoice.setId(id);
             invoices.put(id, invoice);
-
 
         } else {
             save(invoice);
@@ -46,7 +44,7 @@ public class InMemoryRepository implements Repository {
         }
 
         updatedInvoice.setId(id);
-        invoices.put(id,updatedInvoice);
+        invoices.put(id, updatedInvoice);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package pl.targosz.invoicing.model;
 
-import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

@@ -3,7 +3,9 @@ package pl.targosz.invoicing.database;
 import java.util.List;
 import java.util.UUID;
 import pl.targosz.invoicing.model.Invoice;
+
 public interface Repository {
+
     Invoice save(Invoice invoice);
 
     Invoice getById(UUID id);

@@ -30,7 +30,7 @@ public class InvoiceService implements Repository {
 
     @Override
     public void update(UUID id, Invoice updatedInvoice) {
-        repository.update(id,updatedInvoice);
+        repository.update(id, updatedInvoice);
     }
 
     @Override

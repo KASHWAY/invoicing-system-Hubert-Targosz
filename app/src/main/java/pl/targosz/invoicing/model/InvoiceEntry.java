@@ -3,7 +3,6 @@ package pl.targosz.invoicing.model;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @AllArgsConstructor
 @Data
