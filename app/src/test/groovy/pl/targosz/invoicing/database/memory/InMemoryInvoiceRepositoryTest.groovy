@@ -28,7 +28,7 @@ class InMemoryInvoiceRepositoryTest extends Specification {
         then:
 
         repository.getById(invoice.getId()) != null
-        repository.getById(invoice.getId()).getSeller().getName() == "Hubert Targosz"
+        repository.getById(invoice.getId()).get().getSeller().getName() == "Hubert Targosz"
 
     }
 

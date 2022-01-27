@@ -19,7 +19,7 @@ import pl.targosz.invoicing.services.FileService;
 import pl.targosz.invoicing.services.JsonService;
 
 @AllArgsConstructor
-public class FileBasedInvoiceRepository implements InvoiceRepository  {
+public class FileBasedInvoiceRepository implements InvoiceRepository {
 
     private final FileService fileService = new FileService();
     private final JsonService<Invoice> jsonService = new JsonService<>();
@@ -32,6 +32,7 @@ public class FileBasedInvoiceRepository implements InvoiceRepository  {
         try {
             String json = jsonService.toJson(invoice);
             fileService.writeToFile(json);
+
             return invoice;
         } catch (IOException e) {
             throw new IllegalArgumentException();
@@ -70,9 +71,9 @@ public class FileBasedInvoiceRepository implements InvoiceRepository  {
             fileService.writeToFile(jsonService.toJson(updatedInvoice));
             fileService.writeToFile(jsonServiceId.toJson(updatedInvoice));
 
-         }
-        else
+        } else {
             throw new NoSuchObjectException("There is no invoice with id like : " + id + ". Add a new invoice please.");
+        }
 
 
     }
@@ -108,4 +109,5 @@ public class FileBasedInvoiceRepository implements InvoiceRepository  {
         }
         return false;
     }
+
 }

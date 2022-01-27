@@ -30,7 +30,7 @@ class InvoiceServiceTest extends Specification {
         def invoiceSave = invoiceService.save(invoice)
 
         then:
-        repository.getById(invoiceSave.getId()).getBuyer().getName() == "KashwayCompany"
+        repository.getById(invoiceSave.getId()).get().getBuyer().getName() == "KashwayCompany"
 
     }
 
@@ -40,8 +40,7 @@ class InvoiceServiceTest extends Specification {
 
         then:
 
-        repository.getById(invoiceSave.getId()).getSeller().getName() == "Hubert Targosz"
-
+        repository.getById(invoiceSave.getId()).get().getSeller().getName() == "Hubert Targosz"
     }
     def "should get amount of invoices" (){
 
