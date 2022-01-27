@@ -28,6 +28,8 @@ class InMemoryInvoiceRepositoryTest extends Specification {
         then:
 
         repository.getById(invoice.getId()) != null
+        // todo tu jest problem taki że repository.getById zwraca obiekt Optional a nie Invoice
+        //  - musisz najpierw wyciągnąć z optionala obiekt invoice z pomocą metody .get() lub podobnych
         repository.getById(invoice.getId()).getSeller().getName() == "Hubert Targosz"
 
     }

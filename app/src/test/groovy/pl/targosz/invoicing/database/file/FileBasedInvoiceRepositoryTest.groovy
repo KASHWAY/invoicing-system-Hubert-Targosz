@@ -21,9 +21,9 @@ class FileBasedInvoiceRepositoryTest extends Specification {
 
     def "should add new invoice to a repository"() {
         when:
-        repository.save(invoice);
+        Invoice savedInvoice = repository.save(invoice);
         then:
-        repository.containsInRepository(invoice.getId())
+        repository.containsInRepository(savedInvoice.getId())
     }
 
     def "should get an invoice from a repository with id"() {

@@ -11,8 +11,14 @@ public class FileService {
 
     private final File invoiceDb;
 
-    public FileService(){
+    public FileService() {
         invoiceDb = new File(FileConfiguration.INVOICES_DB_PATH);
+        try {
+            Files.createFile(invoiceDb.toPath());
+            Files.createFile(invoiceDb.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void writeToFile(final String line) throws IOException {

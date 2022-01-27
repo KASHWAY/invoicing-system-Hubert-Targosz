@@ -30,6 +30,8 @@ class InvoiceServiceTest extends Specification {
         def invoiceSave = invoiceService.save(invoice)
 
         then:
+
+        // todo ten sam problem co w InMemoryInvoiceRepositoryTest
         repository.getById(invoiceSave.getId()).getBuyer().getName() == "KashwayCompany"
 
     }
@@ -40,6 +42,7 @@ class InvoiceServiceTest extends Specification {
 
         then:
 
+        // todo ten sam problem co w InMemoryInvoiceRepositoryTest
         repository.getById(invoiceSave.getId()).getSeller().getName() == "Hubert Targosz"
 
     }
