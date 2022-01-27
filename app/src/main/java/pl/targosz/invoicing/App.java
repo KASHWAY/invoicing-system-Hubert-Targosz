@@ -4,22 +4,29 @@
 
 package pl.targosz.invoicing;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import pl.targosz.invoicing.database.Repository;
-import pl.targosz.invoicing.database.memory.InMemoryRepository;
+import java.util.stream.Collectors;
+import pl.targosz.invoicing.database.InvoiceRepository;
+import pl.targosz.invoicing.database.memory.InMemoryInvoiceRepository;
 import pl.targosz.invoicing.model.Company;
 import pl.targosz.invoicing.model.Invoice;
 import pl.targosz.invoicing.model.InvoiceEntry;
 import pl.targosz.invoicing.model.Vat;
+import pl.targosz.invoicing.services.FileService;
 import pl.targosz.invoicing.services.InvoiceService;
+import pl.targosz.invoicing.services.JsonService;
 
 public class App {
 
-    public static void main(String[] args) {
-        Repository repository = new InMemoryRepository();
-        InvoiceService invoiceService = new InvoiceService(repository);
+    public static void main(String[] args) throws IOException {
+        InvoiceRepository invoiceRepository = new InMemoryInvoiceRepository();
+        InvoiceService invoiceService = new InvoiceService(invoiceRepository);
+        FileService fileService = new FileService();
+        JsonService<Invoice> jsonService = new JsonService<>();
 
         Company buyer = new Company("1234567891", "KashwayCompany", "Ul. Fiołkowa 15, Kraków");
         Company seller = new Company("3373187493", "Hubert Targosz", "Al. 3 Wieszczy 17/5, Kraków");
@@ -36,6 +43,24 @@ public class App {
         invoiceService.getAll();
 
         invoiceService.delete(invoice.getId());
+
+        String json = jsonService.toJson(invoice);
+
+        fileService.writeToFile(json);
+        fileService.writeToFile(json);
+
+
+        List<Invoice> jsons = fileService.readFile()
+            .map(item -> {
+                try {
+                    return jsonService.toObject(json,Invoice.class);
+                } catch (JsonProcessingException e) {
+                    return null;
+                }
+            })
+            .collect(Collectors.toList());
+
+
     }
 }
 

@@ -1,40 +1,42 @@
 package pl.targosz.invoicing.services;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
-import pl.targosz.invoicing.database.Repository;
+import pl.targosz.invoicing.database.InvoiceRepository;
 import pl.targosz.invoicing.model.Invoice;
 
-public class InvoiceService implements Repository {
+public class InvoiceService implements InvoiceRepository {
 
-    private final Repository repository;
+    private final InvoiceRepository invoiceRepository;
 
-    public InvoiceService(Repository repository) {
-        this.repository = repository;
+    public InvoiceService(InvoiceRepository invoiceRepository) {
+        this.invoiceRepository = invoiceRepository;
     }
 
     @Override
     public Invoice save(Invoice invoice) {
-        return repository.save(invoice);
+        return invoiceRepository.save(invoice);
     }
 
     @Override
-    public Invoice getById(UUID id) {
-        return repository.getById(id);
+    public Optional<Invoice> getById(UUID id) throws IOException {
+        return invoiceRepository.getById(id);
     }
 
     @Override
-    public List<Invoice> getAll() {
-        return repository.getAll();
+    public List<Invoice> getAll() throws IOException {
+        return invoiceRepository.getAll();
     }
 
     @Override
     public void update(UUID id, Invoice updatedInvoice) {
-        repository.update(id, updatedInvoice);
+        invoiceRepository.update(id, updatedInvoice);
     }
 
     @Override
-    public void delete(UUID id) {
-        repository.delete(id);
+    public void delete(UUID id) throws IOException {
+        invoiceRepository.delete(id);
     }
 }

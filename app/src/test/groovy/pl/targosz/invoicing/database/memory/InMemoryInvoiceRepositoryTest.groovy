@@ -1,6 +1,6 @@
 package pl.targosz.invoicing.database.memory
 
-import pl.targosz.invoicing.database.Repository
+import pl.targosz.invoicing.database.InvoiceRepository
 import pl.targosz.invoicing.model.Company
 import pl.targosz.invoicing.model.Invoice
 import pl.targosz.invoicing.model.InvoiceEntry
@@ -8,9 +8,9 @@ import pl.targosz.invoicing.model.Vat
 import spock.lang.Specification
 import java.time.LocalDateTime
 
-class InMemoryRepositoryTest extends Specification {
+class InMemoryInvoiceRepositoryTest extends Specification {
 
-    InMemoryRepository inMemoryRepository = new InMemoryRepository()
+    InMemoryInvoiceRepository inMemoryRepository = new InMemoryInvoiceRepository()
     def createdAt = LocalDateTime.now()
     def firstEntry = new InvoiceEntry("Dom", 1000000 as BigDecimal, 23 as BigDecimal, Vat.VAT_23)
     def buyer = new Company("1234567891", "KashwayCompany", "Ul. Fiołkowa 15, Kraków")
@@ -22,7 +22,7 @@ class InMemoryRepositoryTest extends Specification {
 
     def "should save invoice"() {
         when:
-        Repository repository = new InMemoryRepository()
+        InvoiceRepository repository = new InMemoryInvoiceRepository()
         def result = repository.save(invoice)
 
         then:

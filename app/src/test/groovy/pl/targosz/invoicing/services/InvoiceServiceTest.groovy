@@ -1,7 +1,7 @@
 package pl.targosz.invoicing.services
 
-import pl.targosz.invoicing.database.Repository
-import pl.targosz.invoicing.database.memory.InMemoryRepository
+import pl.targosz.invoicing.database.InvoiceRepository
+import pl.targosz.invoicing.database.memory.InMemoryInvoiceRepository
 import pl.targosz.invoicing.model.Company
 import pl.targosz.invoicing.model.Invoice
 import pl.targosz.invoicing.model.InvoiceEntry
@@ -21,7 +21,7 @@ class InvoiceServiceTest extends Specification {
     UUID id
     def invoice = new Invoice(id, createdAt, seller, buyer, entries1)
     def invoice2 = new Invoice (id,createdAt,seller,buyer,entries1)
-    Repository repository = new InMemoryRepository()
+    InvoiceRepository repository = new InMemoryInvoiceRepository()
     InvoiceService invoiceService = new InvoiceService(repository)
 
 
