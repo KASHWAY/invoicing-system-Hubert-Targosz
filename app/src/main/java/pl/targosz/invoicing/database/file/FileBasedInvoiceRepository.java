@@ -103,6 +103,11 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
 
     public boolean containsInRepository(UUID id) {
         try {
+            // todo nigdzie nie zapisujesz id do ID_DB_PATH,
+            // dlatego nic nie znajdziesz, musiałbyś w metodzie save zapisywać id obiektu do pliku,
+            // dlatego nie przechodzi test
+            // "should add new invoice to a repository"
+            // "should search for invoice with id"
             return Files.readAllLines(Paths.get(FileConfiguration.ID_DB_PATH)).stream().anyMatch(ids -> ids.contains(id.toString()));
         } catch (IOException e) {
             e.printStackTrace();
