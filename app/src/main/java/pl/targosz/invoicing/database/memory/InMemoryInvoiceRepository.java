@@ -30,7 +30,7 @@ public class InMemoryInvoiceRepository implements InvoiceRepository {
 
     @Override
     public Optional<Invoice> getById(UUID id) {
-        return Optional.ofNullable(invoices.get(id));
+        return Optional.of(invoices.get(id));
     }
 
     @Override

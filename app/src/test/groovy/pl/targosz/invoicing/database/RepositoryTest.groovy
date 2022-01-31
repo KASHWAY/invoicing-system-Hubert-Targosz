@@ -5,7 +5,6 @@ import pl.targosz.invoicing.model.Invoice
 import pl.targosz.invoicing.model.InvoiceEntry
 import pl.targosz.invoicing.model.Vat
 import spock.lang.Specification
-
 import java.time.LocalDateTime;
 
 
@@ -21,10 +20,10 @@ abstract class RepositoryTest extends Specification {
     def seller = new Company("3373187493", "Hubert Targosz", "Al. 3 Wieszczy 17/5, Kraków")
     def entries1 = Arrays.asList(firstEntry)
     UUID id
-    def invoice = new Invoice(id, createdAt, seller, buyer, entries1)
+    def invoice = new Invoice(createdAt, seller, buyer, entries1)
     def updatedInvoice = new Invoice(id, createdAt, seller, buyer, entries1)
 
-    def setup(){
+    def setup() {
         repository = getInvoiceRepository()
     }
 
@@ -32,11 +31,11 @@ abstract class RepositoryTest extends Specification {
 
     {
         when:
-        def result = repository.save(invoice)
+        repository.save(invoice)
 
         then:
 
-        repository.getById(invoice.getId()) != null
+        repository.getById(invoice.getId()).get() != null
         repository.getById(invoice.getId()).get().getSeller().getName() == "Hubert Targosz"
 
     }
@@ -47,11 +46,11 @@ abstract class RepositoryTest extends Specification {
         when:
 
         repository.save(invoice)
-        def result = invoice
+        def result = invoice.getId()
 
 
         then:
-        result == repository.getById(invoice.getId())
+        result.equals(repository.getById(invoice.getId()))
 
     }
 

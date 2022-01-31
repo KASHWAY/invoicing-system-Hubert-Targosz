@@ -3,7 +3,6 @@
  */
 package pl.targosz.invoicing
 
-import pl.targosz.invoicing.services.InvoiceService
 import spock.lang.Specification
 
 class AppTest extends Specification {

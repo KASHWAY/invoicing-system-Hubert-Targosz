@@ -14,12 +14,6 @@ public class FileService {
     public FileService() {
         invoiceDb1 = new File(FileConfiguration.ID_DB_PATH);
         invoiceDb = new File(FileConfiguration.INVOICES_DB_PATH);
-        try {
-            Files.createFile(invoiceDb.toPath());
-            Files.createFile(invoiceDb1.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
