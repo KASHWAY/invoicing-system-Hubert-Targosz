@@ -3,7 +3,6 @@ package pl.targosz.invoicing.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import pl.targosz.invoicing.model.Invoice;
 
 public class JsonService<T> {
 
@@ -27,6 +26,5 @@ public class JsonService<T> {
     public T toObject(final String json, Class<T> clazz) throws JsonProcessingException {
         return objectMapper.readValue(json, clazz);
     }
-
 
 }

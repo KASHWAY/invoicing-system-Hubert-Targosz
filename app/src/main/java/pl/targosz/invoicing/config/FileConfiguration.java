@@ -1,8 +1,6 @@
 package pl.targosz.invoicing.config;
 
 import java.net.URL;
-import java.nio.file.OpenOption;
-import java.nio.file.StandardOpenOption;
 import pl.targosz.invoicing.services.FileService;
 
 public class FileConfiguration {

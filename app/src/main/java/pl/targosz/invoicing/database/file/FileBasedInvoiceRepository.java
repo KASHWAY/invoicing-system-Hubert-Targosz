@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.rmi.NoSuchObjectException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,7 +23,6 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
     private final FileService fileService = new FileService();
     private final JsonService<Invoice> jsonService = new JsonService<>();
     private final JsonService<Invoice> jsonServiceId = new JsonService<Invoice>();
-
 
     @Override
     public Invoice save(Invoice invoice) {
@@ -74,7 +72,6 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
         } else {
             throw new IllegalArgumentException("There is no invoice with id like : " + id + ". Add a new invoice please.");
         }
-
 
     }
 
