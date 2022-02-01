@@ -41,7 +41,7 @@ public class InMemoryInvoiceRepository implements InvoiceRepository {
     @Override
     public void update(UUID id, Invoice updatedInvoice) {
         if (!invoices.containsKey(id)) {
-            throw new IllegalArgumentException("There is no id like : " + id);
+            throw new IllegalArgumentException("There is no invoice with id like : " + id + ". Add a new invoice please.");
         }
 
         updatedInvoice.setId(id);
