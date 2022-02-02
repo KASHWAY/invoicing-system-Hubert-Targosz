@@ -10,36 +10,33 @@ import pl.targosz.invoicing.config.FileConfiguration;
 
 public class FileService {
 
-    private final File invoiceDb;
-    private final File invoiceDb1;
+    private final File file;
 
-    public FileService() {
+    public FileService(final String fileName) {
 
-        invoiceDb = new File(FileConfiguration.INVOICES_DB_PATH);
-        invoiceDb1 = new File(FileConfiguration.ID_DB_PATH);
+        file = new File(fileName);
         try {
-            Files.createFile(Paths.get(FileConfiguration.INVOICES_DB_PATH));
-            Files.createFile(Paths.get(FileConfiguration.ID_DB_PATH));
+            Files.createFile(file.toPath());
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
 
     }
 
-
     public void writeToFile(final String line) throws IOException {
-        Files.writeString(invoiceDb.toPath(), line + System.lineSeparator(), StandardOpenOption.APPEND);
-        Files.writeString(invoiceDb1.toPath(), line + System.lineSeparator(), StandardOpenOption.APPEND);
+        Files.writeString(file.toPath(), line + System.lineSeparator(), StandardOpenOption.APPEND);
+
     }
 
     public void writeToFile(final String line, StandardOpenOption openOption) throws IOException {
-        Files.writeString(invoiceDb.toPath(), line + System.lineSeparator(), openOption);
-        Files.writeString(invoiceDb1.toPath(), line + System.lineSeparator(), StandardOpenOption.APPEND);
+        Files.writeString(file.toPath(), line + System.lineSeparator(), openOption);
+
     }
 
     public Stream<String> readFile() throws IOException {
-        return Files.lines(invoiceDb.toPath());
+        return Files.lines(file.toPath());
     }
+
     public void clearAllFiles() {
         try {
             Files.writeString(Paths.get(FileConfiguration.ID_DB_PATH), "");

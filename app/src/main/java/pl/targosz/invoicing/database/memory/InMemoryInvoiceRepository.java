@@ -54,7 +54,7 @@ public class InMemoryInvoiceRepository implements InvoiceRepository {
     }
 
     @Override
-    public void clear(){
+    public void clear() {
         invoices.clear();
     }
 

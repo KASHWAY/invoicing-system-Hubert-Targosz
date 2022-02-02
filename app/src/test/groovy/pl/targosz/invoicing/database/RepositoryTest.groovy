@@ -29,6 +29,7 @@ abstract class RepositoryTest extends Specification {
     def setup() {
         repository = getInvoiceRepository()
         repository.clear()
+
     }
 
     def "should save invoice"()
