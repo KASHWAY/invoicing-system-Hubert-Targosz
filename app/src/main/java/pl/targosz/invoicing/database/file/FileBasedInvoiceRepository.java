@@ -47,7 +47,7 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
                 try {
                     return jsonService.toObject(item, Invoice.class);
                 } catch (JsonProcessingException e) {
-                   e.getMessage();
+                    e.getMessage();
                 }
                 return null;
             }).collect(Collectors.toList());
@@ -78,7 +78,7 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
         try {
             return idsFilesService.readFile().anyMatch(ids -> ids.contains(id.toString()));
         } catch (IOException e) {
-            return  false;
+            return false;
         }
 
     }
