@@ -107,4 +107,8 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
         return false;
     }
 
+    public void clear() {
+        fileService.clearAllFiles();
+    }
+
 }

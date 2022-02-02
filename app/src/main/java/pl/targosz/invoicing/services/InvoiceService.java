@@ -39,4 +39,9 @@ public class InvoiceService implements InvoiceRepository {
     public void delete(UUID id) throws IOException {
         invoiceRepository.delete(id);
     }
+
+    @Override
+    public void clear() {
+
+    }
 }

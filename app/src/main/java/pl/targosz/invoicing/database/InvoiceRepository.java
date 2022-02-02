@@ -18,4 +18,6 @@ public interface InvoiceRepository {
 
     void delete(UUID id) throws IOException;
 
+    void clear();
+
 }
