@@ -53,7 +53,6 @@ public class InMemoryInvoiceRepository implements InvoiceRepository {
         invoices.remove(id);
     }
 
-    @Override
     public void clear() {
         invoices.clear();
     }

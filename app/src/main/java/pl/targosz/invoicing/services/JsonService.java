@@ -18,8 +18,7 @@ public class JsonService<T> {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return null;
+            throw new IllegalArgumentException("Wrong object found");
         }
     }
 

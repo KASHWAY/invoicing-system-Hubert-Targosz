@@ -21,10 +21,9 @@ abstract class RepositoryTest extends Specification {
     def seller = new Company("3373187493", "Mateusz Idiks", "Al. XYZ 5, POZNAN")
     def seller2 = new Company("7515212312", "Hubert Targosz", "Al. 3 Wieszczy 17/5, Kraków")
     def entries1 = Arrays.asList(firstEntry)
-    UUID id
     def invoice = new Invoice(createdAt, seller, buyer, entries1)
     def invoice2 = new Invoice(createdAt, seller2, buyer2, entries1)
-    def updatedInvoice = new Invoice(id, createdAt, seller, buyer, entries1)
+    def updatedInvoice = new Invoice(createdAt, seller, buyer, entries1)
 
     def setup() {
         repository = getInvoiceRepository()

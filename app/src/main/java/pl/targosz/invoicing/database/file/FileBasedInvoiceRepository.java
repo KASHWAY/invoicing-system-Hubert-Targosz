@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import pl.targosz.invoicing.config.FileConfiguration;
 import pl.targosz.invoicing.database.InvoiceRepository;
@@ -14,7 +14,7 @@ import pl.targosz.invoicing.model.Invoice;
 import pl.targosz.invoicing.services.FileService;
 import pl.targosz.invoicing.services.JsonService;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FileBasedInvoiceRepository implements InvoiceRepository {
 
     private final FileService invoicesFileService = new FileService(FileConfiguration.INVOICES_DB_PATH);
@@ -30,7 +30,7 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
             idsFilesService.writeToFile(invoice.getId().toString());
             return invoice;
         } catch (IOException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Wrong invoice data");
         }
     }
 
@@ -47,7 +47,7 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
                 try {
                     return jsonService.toObject(item, Invoice.class);
                 } catch (JsonProcessingException e) {
-                    e.printStackTrace();
+                   e.getMessage();
                 }
                 return null;
             }).collect(Collectors.toList());
@@ -78,10 +78,9 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
         try {
             return idsFilesService.readFile().anyMatch(ids -> ids.contains(id.toString()));
         } catch (IOException e) {
-            e.printStackTrace();
+            return  false;
         }
 
-        return false;
     }
 
     public void clear() {
