@@ -8,7 +8,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import pl.targosz.invoicing.config.FileConfiguration;
 import pl.targosz.invoicing.database.InvoiceRepository;
 import pl.targosz.invoicing.model.Invoice;
 import pl.targosz.invoicing.services.FileService;
@@ -17,9 +16,9 @@ import pl.targosz.invoicing.services.JsonService;
 @RequiredArgsConstructor
 public class FileBasedInvoiceRepository implements InvoiceRepository {
 
-    private final FileService invoicesFileService = new FileService(FileConfiguration.INVOICES_DB_PATH);
-    private final FileService idsFilesService = new FileService(FileConfiguration.ID_DB_PATH);
-    private final JsonService<Invoice> jsonService = new JsonService<>();
+    private final FileService invoicesFileService;
+    private final FileService idsFilesService;
+    private final JsonService<Invoice> jsonService;
 
     @Override
     public Invoice save(Invoice invoice) {
