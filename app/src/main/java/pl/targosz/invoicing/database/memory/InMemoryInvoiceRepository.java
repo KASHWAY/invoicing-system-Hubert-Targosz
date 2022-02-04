@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
-import pl.targosz.invoicing.database.Repository;
+import pl.targosz.invoicing.database.InvoiceRepository;
 import pl.targosz.invoicing.model.Invoice;
 
-public class InMemoryRepository implements Repository {
+public class InMemoryInvoiceRepository implements InvoiceRepository {
 
     protected Map<UUID, Invoice> invoices = new HashMap<>();
 
@@ -28,8 +29,8 @@ public class InMemoryRepository implements Repository {
     }
 
     @Override
-    public Invoice getById(UUID id) {
-        return invoices.get(id);
+    public Optional<Invoice> getById(UUID id) {
+        return Optional.of(invoices.get(id));
     }
 
     @Override
@@ -40,7 +41,7 @@ public class InMemoryRepository implements Repository {
     @Override
     public void update(UUID id, Invoice updatedInvoice) {
         if (!invoices.containsKey(id)) {
-            throw new IllegalArgumentException("There is no id like : " + id);
+            throw new IllegalArgumentException("There is no invoice with id like : " + id + ". Add a new invoice please.");
         }
 
         updatedInvoice.setId(id);
@@ -50,6 +51,10 @@ public class InMemoryRepository implements Repository {
     @Override
     public void delete(UUID id) {
         invoices.remove(id);
+    }
+
+    public void clear() {
+        invoices.clear();
     }
 
 }

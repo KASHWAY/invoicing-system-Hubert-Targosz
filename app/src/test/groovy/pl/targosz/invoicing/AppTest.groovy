@@ -7,6 +7,8 @@ import spock.lang.Specification
 
 class AppTest extends Specification {
 
+    def app = new App()
+
     def "application init check"() {
         setup:
         def app = new App()
@@ -14,4 +16,5 @@ class AppTest extends Specification {
         expect:
         app.main()
     }
+
 }
