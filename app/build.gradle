@@ -7,10 +7,22 @@
  */
 
 plugins {
+    id 'org.springframework.boot' version '2.6.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
     id 'groovy'
     id 'checkstyle'
     id 'application'
     id 'jacoco'
+}
+group = 'pl.targosz.invoicing'
+version = '0.0.1'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 ext {
     groovyVersion = "3.0.9"
@@ -40,6 +52,15 @@ dependencies {
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.1'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+afterEvaluate {
+    classDirectories.setFrom(files(classDirectories.files.collect {
+        fileTree(dir: it, exclude: 'pl/targosz/invoicing/controllers/**')
+    }))
 }
 
 application {
