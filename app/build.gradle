@@ -14,10 +14,10 @@ plugins {
     id 'checkstyle'
     id 'application'
     id 'jacoco'
+
 }
 group = 'pl.targosz.invoicing'
 version = '0.0.1'
-sourceCompatibility = '17'
 
 configurations {
     compileOnly {
@@ -29,7 +29,7 @@ ext {
     lombokVersion = "1.18.22"
 }
 repositories {
-    // Use Maven Central for resolving dependencies.
+
     mavenCentral()
 }
 
@@ -57,11 +57,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 }
-afterEvaluate {
-    classDirectories.setFrom(files(classDirectories.files.collect {
-        fileTree(dir: it, exclude: 'pl/targosz/invoicing/controllers/**')
-    }))
-}
+
 
 application {
     // Define the main class for the application.
@@ -97,6 +93,11 @@ jacocoTestCoverageVerification {
                 minimum = 0.7
             }
         }
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: 'pl/targosz/invoicing/controllers/**')
+        }))
     }
 
 }

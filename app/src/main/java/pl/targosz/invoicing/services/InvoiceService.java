@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.stereotype.Service;
 import pl.targosz.invoicing.database.InvoiceRepository;
 import pl.targosz.invoicing.model.Invoice;
 
+@Service
 public class InvoiceService implements InvoiceRepository {
 
     private final InvoiceRepository invoiceRepository;
