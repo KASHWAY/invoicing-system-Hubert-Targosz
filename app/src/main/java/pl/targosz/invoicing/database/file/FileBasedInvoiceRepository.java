@@ -8,19 +8,21 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import pl.targosz.invoicing.database.InvoiceRepository;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Repository;
 import pl.targosz.invoicing.model.Invoice;
 import pl.targosz.invoicing.services.FileService;
 import pl.targosz.invoicing.services.JsonService;
 
 @RequiredArgsConstructor
-public class FileBasedInvoiceRepository implements InvoiceRepository {
+@Repository
+@ConditionalOnProperty(value = "app.db.file", havingValue = "file")
+public class FileBasedInvoiceRepository {
 
     private final FileService invoicesFileService;
     private final FileService idsFilesService;
     private final JsonService<Invoice> jsonService;
 
-    @Override
     public Invoice save(Invoice invoice) {
         invoice.setId(UUID.randomUUID());
         try {
@@ -33,13 +35,11 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
         }
     }
 
-    @Override
     public Optional<Invoice> getById(UUID id) throws IOException {
         return getAll().stream().filter(invoice -> invoice.getId().equals(id)).findFirst();
 
     }
 
-    @Override
     public List<Invoice> getAll() throws IOException {
         return invoicesFileService.readFile().map(
             item -> {
@@ -53,7 +53,6 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
     }
 
     @SneakyThrows
-    @Override
     public void update(UUID id, Invoice updatedInvoice) {
         if (containsInRepository(id)) {
             delete(id);
@@ -65,7 +64,6 @@ public class FileBasedInvoiceRepository implements InvoiceRepository {
 
     }
 
-    @Override
     public void delete(UUID id) throws IOException {
         List<Invoice> invoices = getAll();
         invoices.removeIf(item -> item.getId().equals(id));

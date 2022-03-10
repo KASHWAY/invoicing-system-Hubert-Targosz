@@ -6,8 +6,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.stream.Stream;
+import org.springframework.stereotype.Service;
 import pl.targosz.invoicing.config.FileConfiguration;
 
+@Service
 public class FileService {
 
     private final File file;

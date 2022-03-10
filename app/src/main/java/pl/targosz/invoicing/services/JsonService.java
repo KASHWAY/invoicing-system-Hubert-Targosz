@@ -3,7 +3,9 @@ package pl.targosz.invoicing.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.stereotype.Service;
 
+@Service
 public class JsonService<T> {
 
     private final ObjectMapper objectMapper;

@@ -6,14 +6,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import pl.targosz.invoicing.database.InvoiceRepository;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Repository;
 import pl.targosz.invoicing.model.Invoice;
 
-public class InMemoryInvoiceRepository implements InvoiceRepository {
+@Repository
+@ConditionalOnProperty(value = "app.db.memory", havingValue = "file", matchIfMissing = true)
+public class InMemoryInvoiceRepository {
 
     protected Map<UUID, Invoice> invoices = new HashMap<>();
 
-    @Override
     public Invoice save(Invoice invoice) {
         UUID id = UUID.randomUUID();
 
@@ -28,17 +30,14 @@ public class InMemoryInvoiceRepository implements InvoiceRepository {
         return invoice;
     }
 
-    @Override
     public Optional<Invoice> getById(UUID id) {
         return Optional.of(invoices.get(id));
     }
 
-    @Override
     public List<Invoice> getAll() {
         return new ArrayList<>(invoices.values());
     }
 
-    @Override
     public void update(UUID id, Invoice updatedInvoice) {
         if (!invoices.containsKey(id)) {
             throw new IllegalArgumentException("There is no invoice with id like : " + id + ". Add a new invoice please.");
@@ -48,7 +47,6 @@ public class InMemoryInvoiceRepository implements InvoiceRepository {
         invoices.put(id, updatedInvoice);
     }
 
-    @Override
     public void delete(UUID id) {
         invoices.remove(id);
     }

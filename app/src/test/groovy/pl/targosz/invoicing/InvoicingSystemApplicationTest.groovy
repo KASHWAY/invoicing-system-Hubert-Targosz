@@ -5,13 +5,13 @@ package pl.targosz.invoicing
 
 import spock.lang.Specification
 
-class AppTest extends Specification {
+class InvoicingSystemApplicationTest extends Specification {
 
-    def app = new App()
+    def app = new InvoicingSystemApplication()
 
     def "application init check"() {
         setup:
-        def app = new App()
+        def app = new InvoicingSystemApplication()
 
         expect:
         app.main()
